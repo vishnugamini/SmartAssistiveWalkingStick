@@ -9,20 +9,16 @@
 #include <HCSR04.h>
 #include <HTTPClient.h>
 
-// OLED display TWI address and dimensions
 #define OLED_ADDR   0x3C
 #define SCREEN_WIDTH 128
 #define SCREEN_HEIGHT 64
 #define SDA_PIN 21
 #define SCL_PIN 22
 
-// SSD1306 display initialization
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, -1);
 
-// WiFi credentials
 const char* ssid = "GK";
 const char* password = "password123";
-
 
 #define DHTPIN 14
 #define DHTTYPE DHT11
@@ -39,11 +35,11 @@ const int LED_PIN = 33;
 const byte triggerPin = 13;
 const byte echoPin = 12;
 
-const byte triggerPin2 = 25; // New trigger pin for second sensor
-const byte echoPin2 = 26;   // New echo pin for second sensor
+const byte triggerPin2 = 25; 
+const byte echoPin2 = 26;  
 
-const byte triggerPin3 = 18 ; // New trigger pin for third sensor
-const byte echoPin3 = 19;   // New echo pin for third sensor
+const byte triggerPin3 = 18 ;
+const byte echoPin3 = 19; 
 
 bool sosActive = false;
 bool buzzerOn = false;
@@ -59,23 +55,20 @@ enum DisplayState {
     NUM_STATES // Total number of states
 };
 
-DisplayState currentState = SHOW_TEMPERATURE; // Start with displaying temperature
+DisplayState currentState = SHOW_TEMPERATURE; 
 unsigned long lastDisplayUpdate = 0;
-const long displayInterval = 3000; // Change display every 3000 milliseconds (3 seconds)
+const long displayInterval = 3000; 
 
-
-// Button pin definition
 const int BUTTON_PIN = 32;
-int buttonState = LOW; // Current state of the button
-int lastButtonState = LOW; // Previous state of the button
-unsigned long lastDebounceTime = 0; // Last time the button state was changed
-unsigned long debounceDelay = 50; // Debounce delay to prevent flickering
-int sosCount = 0; // Counter for consecutive presses
+int buttonState = LOW; 
+int lastButtonState = LOW; 
+unsigned long lastDebounceTime = 0; 
+unsigned long debounceDelay = 50; 
+int sosCount = 0; 
 Adafruit_MPU6050 mpu;
 UltraSonicDistanceSensor distanceSensor(triggerPin, echoPin);
 UltraSonicDistanceSensor distanceSensor2(triggerPin2, echoPin2);
 UltraSonicDistanceSensor distanceSensor3(triggerPin3, echoPin3);
-
 
 float distance = 0.0;
 
@@ -84,7 +77,6 @@ void setup() {
     while (!Serial)
         delay(10);
 
-    // Initialize the OLED display
     if (!display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR)) {
         Serial.println(F("SSD1306 allocation failed"));
         for (;;);
@@ -97,7 +89,6 @@ void setup() {
     delay(3000);
     display.display();
 
-    // Connect to WiFi
     WiFi.begin(ssid, password);
     while (WiFi.status() != WL_CONNECTED) {
         delay(1000);
@@ -171,7 +162,7 @@ void loop() {
     unsigned long currentMillis = millis();
     if (currentMillis - lastDisplayUpdate >= displayInterval) {
         lastDisplayUpdate = currentMillis;
-        updateDisplay(); // Update the display with new state
+        updateDisplay(); 
     }
 
     if (currentMillis - previousMillis >= interval) {
@@ -186,8 +177,6 @@ void loop() {
 
         sensors_event_t a, g, temp;
         mpu.getEvent(&a, &g, &temp);
-
-        // Output the sensor data to the Serial monitor
         Serial.print("Temperature: ");
         Serial.print(temperature);
         Serial.println(" °C");
@@ -216,54 +205,52 @@ void loop() {
         Serial.print(distance3);
         Serial.println(" cm");
 
-        // Buzzer logic based on distance from all sensors
         float minDistance = min(min(distance, distance2), distance3);
 
         if (minDistance > 0 && minDistance <= 25) {
-            int frequency = map(minDistance, 1, 20, 2000, 1000);  // Higher frequency for closer distance (inverse relation)
+            int frequency = map(minDistance, 1, 20, 2000, 1000);  
             tone(BUZZER_PIN, frequency);
         } else {
             if (!buzzerOn && !ledOn) {
-                noTone(BUZZER_PIN);  // Turn off the buzzer if no close object is detected
+                noTone(BUZZER_PIN);  
             }
         }
     }
 }
 
-
 void updateDisplay() {
-    display.clearDisplay(); // Clear the previous content
-    display.setTextSize(2); // Set text size
-    display.setTextColor(SSD1306_WHITE); // Set text color
-    display.setCursor(0, 10); // Set cursor position
+    display.clearDisplay();
+    display.setTextSize(2); 
+    display.setTextColor(SSD1306_WHITE); 
+    display.setCursor(0, 10); 
 
     switch (currentState) {
         case SHOW_TEMPERATURE:
             display.println("Temp: " + String(dht.readTemperature()) + " C");
-            currentState = SHOW_HUMIDITY; // Move to next state
+            currentState = SHOW_HUMIDITY;
             break;
         case SHOW_HUMIDITY:
             display.println("Hum: " + String(dht.readHumidity()) + " %");
-            currentState = SHOW_DISTANCE; // Move to next state
+            currentState = SHOW_DISTANCE; 
             break;
         case SHOW_DISTANCE:
             display.println("Dist: " + String(distance) + " cm");
-            currentState = SHOW_TEMPERATURE; // Move to next state
+            currentState = SHOW_TEMPERATURE; 
             break;
         default:
-            currentState = SHOW_TEMPERATURE; // Default to temperature if out of range
+            currentState = SHOW_TEMPERATURE;
             break;
     }
-    display.display(); // Actually display all the above
+    display.display(); 
 }
 
 void handleSOS() {
     unsigned long signalMillis = millis();
     int signalPhase = 0;
-    const int shortBeep = 150;  // Short beep duration
-    const int longBeep = 450;   // Long beep duration
-    const int pause = 150;      // Pause duration between signals
-    const int longPause = 750;  // Long pause after one complete SOS
+    const int shortBeep = 150;  
+    const int longBeep = 450;  
+    const int pause = 150; 
+    const int longPause = 750; 
 
     while (sosActive) {
         unsigned long currentMillis = millis();
@@ -272,10 +259,8 @@ void handleSOS() {
             (signalPhase >= 3 && signalPhase < 6) ? longBeep : longPause)) {
             signalMillis = currentMillis; // Reset the timer at the end of each tone/pause
             if (signalPhase < 3 || (signalPhase >= 6 && signalPhase < 9)) {
-                // Short beep
                 tone(BUZZER_PIN, 1000, shortBeep);
             } else if (signalPhase >= 3 && signalPhase < 6) {
-                // Long beep
                 tone(BUZZER_PIN, 1000, longBeep);
             }
             signalPhase++;
@@ -286,7 +271,6 @@ void handleSOS() {
             }
         }
 
-        // Check for button input to possibly stop SOS
         int reading = digitalRead(BUTTON_PIN);
         if (reading != lastButtonState) {
             lastDebounceTime = millis();
@@ -300,7 +284,7 @@ void handleSOS() {
                     if (sosCount == 3) {
                         sosActive = false;
                         sosCount = 0;
-                        noTone(BUZZER_PIN); // Stop the buzzer
+                        noTone(BUZZER_PIN); 
                     }
                 }
             }
@@ -321,7 +305,6 @@ void handleSensorData() {
     if (isnan(temperature) || isnan(humidity)) {
         server.send(500, "text/plain", "Error reading sensor data");
     } else {
-        /* Get new sensor events with the readings */
         sensors_event_t a, g, temp;
         mpu.getEvent(&a, &g, &temp);
 
@@ -335,10 +318,8 @@ void handleSensorData() {
 }
 
 void handleDistanceMeasurement() {
-    // Create a JSON response string
     String response = String("{\"distance\":") + distance + "}";
     
-    // Send the response to the client
     server.send(200, "application/json", response);
 }
 
@@ -350,7 +331,7 @@ void handleControlBuzzer() {
       tone(BUZZER_PIN, 2000);
         if (!buzzerOn) {
             buzzerOn = true;
-            tone(BUZZER_PIN, 5000); // Ensure the frequency is set correctly
+            tone(BUZZER_PIN, 5000); 
             server.send(200, "text/plain", "Buzzer turned on");
         } else {
             server.send(200, "text/plain", "Buzzer is already on");
@@ -374,7 +355,7 @@ void handleControlSOS() {
     if (command == "on") {
         if (!sosActive) {
             sosActive = true;
-            handleSOS(); // Start the SOS signal
+            handleSOS(); 
             server.send(200, "text/plain", "SOS activated");
         } else {
             server.send(200, "text/plain", "SOS is already active");
@@ -382,7 +363,7 @@ void handleControlSOS() {
     } else if (command == "off") {
         if (sosActive) {
             sosActive = false;
-            noTone(BUZZER_PIN); // Stop the SOS signal
+            noTone(BUZZER_PIN); 
             server.send(200, "text/plain", "SOS deactivated");
         } else {
             server.send(200, "text/plain", "SOS is already inactive");
@@ -399,7 +380,7 @@ void handleControlLED() {
     if (command == "on") {
         if (!ledOn) {
             ledOn = true;
-            ledcWrite(LED_CHANNEL, 255); // Max brightness
+            ledcWrite(LED_CHANNEL, 255); 
             server.send(200, "text/plain", "LED turned on");
         } else {
             server.send(200, "text/plain", "LED is already on");
@@ -407,7 +388,7 @@ void handleControlLED() {
     } else if (command == "off") {
         if (ledOn) {
             ledOn = false;
-            ledcWrite(LED_CHANNEL, 0); // Turn off
+            ledcWrite(LED_CHANNEL, 0); 
             server.send(200, "text/plain", "LED turned off");
         } else {
             server.send(200, "text/plain", "LED is already off");
