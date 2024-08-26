@@ -52,16 +52,6 @@ The system architecture is centered around the ESP32 microcontroller, which inte
 3. **Upload the Code:**
    - Open the project in Arduino IDE and upload it to the ESP32 microcontroller.
 
-4. **Configure Smartphone Application:**
-   - Pair the device with the smartphone via Bluetooth and set up the monitoring app.
-
-## Usage
-
-1. Power on the smart cane and ensure it's paired with the smartphone.
-2. The cane will automatically start detecting obstacles and monitoring for falls.
-3. In case of a detected fall, an SOS message will be sent to the connected smartphone.
-4. Family members or caregivers can monitor the real-time data through the app.
-
 ## Future Work
 
 - **Enhanced Fall Detection:** Further refine the neural network for even higher accuracy.
