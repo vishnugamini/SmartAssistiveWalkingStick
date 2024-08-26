@@ -4,7 +4,7 @@
 
 This repository contains the software implementation of the AI Powered Smart Assistive Walking Stick, designed to aid elderly individuals with visual impairments. The walking stick features advanced capabilities like fall detection, obstacle avoidance, and real-time monitoring, aimed at ensuring the safety and independence of the user.
 
-## UI 
+## User Interface 
 ![Smart Cane Overview](public/pic-1.png)
 ![System Architecture](public/pic-2.png)
 
@@ -31,6 +31,9 @@ This repository contains the software implementation of the AI Powered Smart Ass
 - **Vibratory Motors**
 - **SOS Button**
 - **Lithium-ion Battery**
+- lcd screen
+- Heart Rate monitor
+- Temperature and Humidity sensor
 
 ## System Architecture
 
