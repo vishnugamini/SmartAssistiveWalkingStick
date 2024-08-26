@@ -17,7 +17,7 @@ This repository contains the software implementation of the AI Powered Smart Ass
 ## Tech Stack
 
 - **Microcontroller:** ESP32
-- **Programming Languages:** C++, Python
+- **Programming Languages:** C++, Javascript, Node.JS, tensorflowlite
 - **Neural Network:** Custom model for fall detection
 - **Sensors:** Accelerometer, Gyroscope, Ultrasonic Proximity Sensors
 - **Connectivity:** Bluetooth for smartphone integration, Cloud for data transmission
