@@ -29,5 +29,5 @@ print(f'Test Accuracy: {test_accuracy:.4f}')
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 tflite_model = converter.convert()
 
-with open('fall_detection_model.tflite', 'wb') as f:
+with open('fall_detection_model.tflite', 'wb+') as f:
     f.write(tflite_model)
