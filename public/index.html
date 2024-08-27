@@ -4,19 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Walking Stick</title>
-    <!-- Include the stylesheet -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Include Socket.io client script -->
     <script src="/socket.io/socket.io.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
 </head>
 <body>
-    
     <div class="container">
         <h1>Smart Walking Stick</h1>
-
-        <!-- Section to display temperature and humidity -->
         <div id="sensorData" class="sensor-info">
             <h2>Sensor Data</h2>
             <div class="sensor-displays">
@@ -43,17 +37,12 @@
             <div id="buzzerIndicator" class="buzzer-indicator off"></div>
         </div>
         
-        
-        <!-- LED Control Button -->
         <div id="ledControl" class="button-container">
             <h2>LED Control</h2>
             <button id="ledOn">Turn LED On</button>
             <button id="ledOff">Turn LED Off</button>
             <div id="lightIndicator" class="light-indicator off"></div>
         </div>
-        
-
-        <!-- Section to capture accelerometer and gyroscope values -->
         <div id="accelerometerGyroscope" class="sensor-info">
             <h2>Accelerometer & Gyroscope</h2>
             <div class="orientation-container">
@@ -66,21 +55,13 @@
             <p id="gyroY"></p>
             <p id="gyroZ"></p>
         </div>
-        <!-- Section to display distance measurement -->
         <div id="sosControl" class="button-container">
             <h2>SOS Signal</h2>
             <button id="sosOn">Activate SOS</button>
             <div id="sosIndicator" class="sos-indicator off"></div>
         </div> 
-
-        <!-- Section to display distance measurement -->
         <div id="distanceMeasurement" class="sensor-info">
             <h2>Distance Measurement</h2>
-            <!-- <div class="tabs">
-                <button class="tab-link active" onclick="openSensor(event, 'Distance')">Distance</button>
-                <button class="tab-link" onclick="openSensor(event, 'Distance2')">Distance 2</button>
-                <button class="tab-link" onclick="openSensor(event, 'Distance3')">Distance 3</button>
-            </div> -->
             <div id="Distance" class="tab-content active">
                 <p id="distance"></p>
                 <div id="distanceIndicator" class="distance-indicator"></div>
@@ -88,12 +69,10 @@
             <div id="Distance2" class="tab-content active">
                 <p id="distance2"></p>
                 <div id="distanceIndicator2" class="distance-indicator"></div>
-                <!-- Additional indicators if needed -->
             </div>
             <div id="Distance3" class="tab-content active">
                 <p id="distance3"></p>
                 <div id="distanceIndicator3" class="distance-indicator"></div>
-                <!-- Additional indicators if needed -->
             </div>
         </div> 
 
