@@ -33,17 +33,17 @@ h1, h2 {
 
 .button-container {
     display: flex;
-    align-items: center; /* Align items vertically */
-    justify-content: center; /* Center items horizontally */
+    align-items: center; 
+    justify-content: center; 
     flex-wrap: wrap;
-    gap: 10px; /* Spacing between items */
+    gap: 10px; 
 }
 
 .button-container button {
     flex: 1;
     padding: 12px 0;
     margin: 5px;
-    background: #4CAF50; /* Green background for buttons */
+    background: #4CAF50; 
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -64,13 +64,13 @@ h1, h2 {
 }
 
 .light-indicator.on {
-    background-color: #ffeb3b; /* Yellow light when on */
-    box-shadow: 0 0 20px #ffeb3b; /* Glowing effect */
+    background-color: #ffeb3b; 
+    box-shadow: 0 0 20px #ffeb3b; 
 }
 
 .light-indicator.off {
-    background-color: #555; /* Dark when off */
-    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* No glow effect */
+    background-color: #555; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 .buzzer-indicator {
     width: 30px;
@@ -78,7 +78,7 @@ h1, h2 {
     background-color: transparent;
     border-radius: 50%;
     position: relative;
-    margin-right: 20px; /* Adjust as needed */
+    margin-right: 20px; 
 }
 
 .buzzer-indicator::before,
@@ -96,27 +96,27 @@ h1, h2 {
 }
 
 .buzzer-indicator::before {
-    border-top-color: #ccc; /* Color for off state */
+    border-top-color: #ccc; 
     border-right-color: #ccc;
 }
 
 .buzzer-indicator::after {
     width: 18px;
     height: 18px;
-    border-top-color: #ccc; /* Make it lighter or transparent for off state */
+    border-top-color: #ccc; 
     border-right-color: #ccc;
 }
 
 .buzzer-indicator.on::before {
     animation: buzzer-on 1s infinite alternate;
-    border-top-color: #e74c3c; /* Color for on state */
+    border-top-color: #e74c3c; 
     border-right-color: #e74c3c;
 }
 
 .buzzer-indicator.on::after {
     animation: buzzer-on 1s infinite alternate;
-    animation-delay: 0.2s; /* Slight delay to create staggered effect */
-    border-top-color: #e74c3c; /* Color for on state */
+    animation-delay: 0.2s;
+    border-top-color: #e74c3c; 
     border-right-color: #e74c3c;
 }
 
@@ -127,25 +127,24 @@ h1, h2 {
 
 .distance-indicator {
     height: 20px;
-    background-color: #4CAF50; /* Initial color indicating 'safe' distance */
-    width: 50%; /* Initial width based on an example safe distance */
+    background-color: #4CAF50; 
+    width: 50%; 
     transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-/* CSS classes for different distance thresholds */
 .distance-indicator.close {
-    width: 80%; /* Wider bar indicates closer distance */
-    background-color: #e74c3c; /* Red color for close proximity */
+    width: 80%; 
+    background-color: #e74c3c; 
 }
 
 .distance-indicator.medium {
-    width: 60%; /* Medium width for medium distance */
-    background-color: #f39c12; /* Orange color for caution */
+    width: 60%; 
+    background-color: #f39c12; 
 }
 
 .distance-indicator.far {
-    width: 20%; /* Narrow bar indicates further distance */
-    background-color: #3498db; /* Blue color for far distance */
+    width: 20%; 
+    background-color: #3498db; 
 }
 .orientation-container {
     width: 100px;
@@ -154,21 +153,20 @@ h1, h2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ddd; /* Light grey background to highlight the area */
-    border: 1px solid #bbb; /* Light border for the container */
+    background-color: #ddd;
+    border: 1px solid #bbb;
 }
 
 .walking-stick {
     width: 5px;
     height: 50px;
     background-color: black;
-    transform-origin: bottom center; /* This ensures the stick rotates around its bottom */
+    transform-origin: bottom center; 
 }
 
-/* You can add more styling here to make the walking stick look more realistic */
 .thermometer, .hygrometer {
-    width: 20px; /* width of the bars */
-    height: 100px; /* height of the bars */
+    width: 20px; 
+    height: 100px; 
     background-color: #ddd;
     border-radius: 10px;
     position: relative;
@@ -177,32 +175,32 @@ h1, h2 {
 
 .thermometer-fill, .hygrometer-fill {
     width: 100%;
-    height: 0%; /* Initially no fill */
+    height: 0%;
     position: absolute;
     bottom: 0;
-    background-color: red; /* Red for temperature */
+    background-color: red; 
     border-radius: 10px;
     transition: height 0.5s ease-in-out;
 }
 
 .hygrometer-fill {
-    background-color: blue; /* Blue for humidity */
+    background-color: blue;
 }
 
 .temperature-display, .humidity-display {
-    margin: 0; /* Reset margins for these elements */
-    text-align: center; /* Center the text for these elements */
+    margin: 0;
+    text-align: center;
 }
 
 .sensor-displays {
     display: flex;
-    justify-content: center; /* This centers the flex items horizontally */
-    align-items: center; /* This centers the flex items vertically */
-    gap: 20px; /* This adds space between the flex items */
+    justify-content: center; 
+    align-items: center; 
+    gap: 20px; 
 }
 
 button:hover {
-    background: #43A047; /* Darker shade of button background */
+    background: #43A047; 
     box-shadow: none;
     transform: translateY(-3px);
 }
@@ -222,13 +220,13 @@ button:active {
 }
 
 .sos-indicator.off {
-    background-color: #555; /* Dark when off */
-    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* No glow effect */
+    background-color: #555;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); 
 }
 
 .sos-indicator.on {
-    background-color: #e74c3c; /* Red when on */
-    box-shadow: 0 0 20px #e74c3c; /* Glowing effect */
+    background-color: #e74c3c; 
+    box-shadow: 0 0 20px #e74c3c; 
 }
 
 .sos-indicator.on::before,
@@ -251,40 +249,9 @@ button:active {
     height: 45px;
 }
 
-/* .tabs {
-    overflow: hidden;
-    background-color: #333;
-    margin: 10px 0;
-} */
-
-/* .tab-link {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-    color: white;
-}
-
-.tab-link:hover {
-    background-color: #ddd;
-    color: black;
-}
-
-.tab-content {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
-} */
-
 .tab-content.active {
     display: block;
 }
-
 
 @keyframes sos-pulse {
     0%, 100% {
@@ -297,16 +264,11 @@ button:active {
     }
 }
 
-
-
 @keyframes pulseAnimation {
     0% { transform: scale(0.95); opacity: 0.7; }
     70% { transform: scale(1); opacity: 0.4; }
     100% { transform: scale(0.95); opacity: 0.7; }
 }
-
-
-
 
 #temperature, #humidity, #accelX, #accelY, #accelZ, #gyroX, #gyroY, #gyroZ, #distance {
     font-size: 16px;
